@@ -1,27 +1,20 @@
 // import React from 'react'
-// import React from './Header'
-// import React from './Body'
-
-// import { useNavigate } from 'react-router-dom'
-// import Header from './Header'
-
-// const Home = () => {
-//   const router=useNavigate();
+// import App from './App.js';
+// import { Toaster } from 'react-hot-toast';
+// 
+// 
+// const root=ReactDom.createRoot(document.getElementById('root'))
+// root.render(
+    // <React.StrictMode></React.StrictMode>
+// )
+// 
+// const index = () => {
 //   return (
-//     // <div id="Home">
-//       {/* <Header/> */}
-//       {/* <Body/> */}
-//      {/* <h1>Welcome home</h1> */}
-//     {/* </div> */}
-//     // <h1 className='heading'>welcome Home</h1><br/>
-//     // <button className='btn' onClick={()->router("./products")}>Products</button>
-
+    // <div>index</div>
 //   )
 // }
-
-// export default Home;
-
-
+// 
+// export default index
 
 import React,{useEffect , useState} from 'react'
 // import React from 'react'

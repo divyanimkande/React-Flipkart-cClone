@@ -1,54 +1,65 @@
-import React from 'react'
+
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { Toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-const Login =()=>{
-  const[userLogInData,setUserLogInData]=useState();
-  const router-useNavigate();
-    
-    useEffect(()->{
-      if(userLogInData){
-        const registerData = JSON.parse(localStorage.getItem("userData"));
-          if(registerData){
-            if(registerData.email === userLogInData.email && registerData.password ===userLogInData.password){
-                localStorage.setItem()
+const Login = () => {
+   const[userLogInData,setUserLogInData]=useState();
+//    console.log(userLogInData,"userLoginData here");
+const router=useNavigate();
+
+   useEffect(()=>{
+    if(userLogInData){
+        const registeredData = JSON.parse(localStorage.getItem("userData"));
+        if(registeredData){
+            if(registeredData.email === userLogInData.email && registeredData.password === userLogInData.password){
+                localStorage.setItem("isUserLogged", "true")
+                router('/Home')
+             toast.success("Login Successfull WELCOME HOME!")
+            }else{
+                toast.error("Wrong Credentials !")
             }
-          }
-
-
+        }else{
+            toast.error("User Not Found plz Register.")
+    }
+    }
+   },[userLogInData]);
+    
+ useEffect(()=>{
+      const localStorageData = JSON.parse(localStorage.getItem("isUserLogged"));
+      if(localStorageData){
+        // console.log("user logged in already, Directing to home");
+        router('/');
       }
-    })
+    });
 
+   function submitHandle(e){
+    e.preventDefault();
+    router("/")
+    alert("Submitted")
+    setUserLogInData({
+        email:"abc@gmail.com",
+        password:"Pass@123"
+      })
+   }
+//    console.log(userdata,"userdata heree")
 
-
-
-
-
-
-
-}
-const Register = () => {
-  // const [userData, setUserData]=useState({})
-  function submitHandle(){
-    alert("submitted")
-  }
-  
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={submitHandle}>
-        <label>Name</label><br/>
-        <input type='test'/><br/>
-        <label>Email</label><br/>
-        <input type='Email'/><br/>
-        <label>Password</label><br/>
-        <input type='password'/><br/>
-        <input type='submit'/>
-      </form>
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"80px"}}>
+       <form onSubmit={submitHandle} style={{border:"1px solid #5cb0b1",padding:"30px",paddingRight:"50px",backgroundColor:"#5cb0b1",borderRadius:"10px"}} id="form">
+ <          h1 style={{color:"#f21274"}}>Login Form</h1>
+        <label style={{fontSize:"20px"}}>Email</label><br />
+        <input style={{padding:"10px",width:"100%"}}  type="email" placeholder='Email' /><br /><br />
+        <label style={{fontSize:"20px"}} >Password</label><br />
+        <input style={{padding:"10px",width:"100%"}}  type="password" placeholder=' Password' /><br /><br />
+        <input style={{padding:"8px",width:"40%",margin:"10px",marginLeft:"60px",color:"white",backgroundColor:"#cc4600",border:"1px solid #cc4600"}} type="submit" /><br />
+         <a href="./Register" style={{ color:"white",textDecoration:"none",marginLeft:"20px",fontWeight:"500",color:"blue"}}>Not User? Register here</a>
+         <button onClick={() => router("./home")}>Click</button>
+         <button type="button" class="btn btn-success">Success</button>
+        {/* / <button type="button" class="btn btn-warning">Warning</button> */}
+       </form>
     </div>
   )
 }
 
-export default Register
+export default Login;
